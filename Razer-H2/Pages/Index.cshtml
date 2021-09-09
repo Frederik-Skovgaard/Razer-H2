@@ -10,11 +10,13 @@
 
     @foreach (Modul.ToDo dos in Model.doRepository.ToDos)
     {
-        <form>
-            <a class="" href="#">ToDo: @dos.TaskDescription</a>
-            <input value="@dos.IsCompleted" type="checkbox" />
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Delete</button>
+        <form class="ToDos">
+            <div class="form-group">
+                <a href="#">ToDo: @dos.TaskDescription</a>
+                <input value="@dos.IsCompleted" type="checkbox" />
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
         </form>
     }
 </div>
