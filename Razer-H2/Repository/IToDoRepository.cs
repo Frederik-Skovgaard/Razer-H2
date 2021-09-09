@@ -8,7 +8,7 @@ namespace Razer_H2.Repository
 {
     interface IToDoRepository
     {
-        void CreateToDo(string description);
+        void CreateToDo(ToDo toDo);
 
         void UpdateToDo(Guid id, string desc, bool isCheck, Priority priority);
 

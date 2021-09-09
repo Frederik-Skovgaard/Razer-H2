@@ -17,9 +17,8 @@ namespace Razer_H2.Repository
         /// Create new ToDo
         /// </summary>
         /// <param name="desc"></param>
-        public void CreateToDo(string desc)
+        public void CreateToDo(ToDo toDo)
         {
-            ToDo toDo = new ToDo(desc);
             toDos.Add(toDo);
         }
 
