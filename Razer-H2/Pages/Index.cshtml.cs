@@ -18,9 +18,11 @@ namespace Razer_H2.Pages
             _logger = logger;
         }
 
+        
+
         public void OnGet()
         {
-
+            
         }
     }
 }
