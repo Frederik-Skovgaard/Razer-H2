@@ -59,39 +59,41 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <button type="button" class="modalBtn btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">X</button>
-                <div class="modal-body">
-                    <h1>Create a Todo</h1>
-                    <div class="editModal col-6">
-                        <div class="form-group">
-                            <label>Priority:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityLow" />
-                                <label class="form-check-label" for="PriorityLow">Low</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityNormal" checked />
-                                <label class="form-check-label" for="PriorityNormal">Normal</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityHigh" />
-                                <label class="form-check-label" for="PriorityHigh">High</label>
+                <form method="post" asp-page-handler="add">
+                    <div class="modal-body">
+                        <h1>Create a Todo</h1>
+                        <div class="editModal col-6">
+                            <div class="form-group">
+                                <label>Priority:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="Todo.Priority" data-val="true" value="@Modul.Priority.Low" type="radio" name="PriorityRaido" id="PriorityLow" />
+                                    <label class="form-check-label" asp-for="Todo.Priority" for="PriorityLow">Low</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="Todo.Priority" data-val="true"  value="@Modul.Priority.Normal" type="radio" name="PriorityRaido" id="PriorityNormal" checked="checked"/>
+                                    <label class="form-check-label" asp-for="Todo.Priority" for="PriorityNormal">Normal</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="Todo.Priority" data-val="true"  value="@Modul.Priority.High" type="radio" name="PriorityRaido" id="PriorityHigh" />
+                                    <label class="form-check-label" asp-for="Todo.Priority" for="PriorityHigh">High</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="editModal col-6">
-                        <div class="form-group">
-                            <label for="Desciption" asp-for="Todo.TaskDescription">Description: </label>
-                            <input type="text" asp-for="Todo.TaskDescription" data-val="true" data-val-maxlenght="25" class="form-control" id="Desciption" aria-describedby="txtDesc" placeholder="Write description" />
-                            <span asp-validation-for="Todo.TaskDescription"></span>
+                        <div class="editModal col-6">
+
+                            <div class="form-group">
+                                <label for="Desciption" asp-for="Todo.TaskDescription">Description: </label>
+                                <input type="text" asp-for="Todo.TaskDescription" data-val="true" data-val-maxlenght="25" class="form-control" id="Desciption" aria-describedby="txtDesc" placeholder="Write description" />
+                                <span asp-validation-for="Todo.TaskDescription"></span>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <form method="post" asp-page-handler="add">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
-                </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

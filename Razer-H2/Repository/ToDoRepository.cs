@@ -16,8 +16,8 @@ namespace Razer_H2.Repository
         {
             toDos = new List<ToDo>
             {
-                new ToDo{ID=Guid.NewGuid() ,Priority=Priority.Normal ,IsCompleted=false ,CreatedTime=DateTime.Now ,TaskDescription="TextDescription1"},
-                new ToDo{ID=Guid.NewGuid() ,Priority=Priority.Normal ,IsCompleted=false ,CreatedTime=DateTime.Now ,TaskDescription="TextDescription2"}
+                new ToDo{ID=Guid.NewGuid() ,Priority=Priority.Normal ,IsCompleted=false ,CreatedTime=DateTime.UtcNow ,TaskDescription="TextDescription1"},
+                new ToDo{ID=Guid.NewGuid() ,Priority=Priority.Normal ,IsCompleted=false ,CreatedTime=DateTime.UtcNow ,TaskDescription="TextDescription2"}
             };
         }
 
@@ -27,6 +27,10 @@ namespace Razer_H2.Repository
         /// <param name="desc"></param>
         public void CreateToDo(ToDo toDo)
         {
+            toDo.ID = Guid.NewGuid();
+            toDo.CreatedTime = DateTime.UtcNow;
+            toDo.IsCompleted = false;
+
             toDos.Add(toDo);
         }
 
