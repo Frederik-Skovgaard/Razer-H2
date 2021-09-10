@@ -76,6 +76,12 @@ body {
 /* Index
 -------------------------------------------------- */
 
+.pb-3 {
+    text-align: -webkit-center;
+}
+.text-center {
+    width: 35rem;
+}
 
 
 .ToDos {
@@ -126,3 +132,14 @@ body {
     width: 20px;
     vertical-align: text-top;
 }
+
+
+.bottom{
+
+}
+    .bottom .row {
+        
+    }
+    .bottom .btn {
+        margin-top: 1.5rem;
+    }

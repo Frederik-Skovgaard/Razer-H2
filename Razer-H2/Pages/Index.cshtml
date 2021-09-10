@@ -8,8 +8,6 @@
 <div class="text-center">
     <form method="post"><button class="btn btn-lg btn-primary" style="margin-bottom: 1rem;">Do it...</button></form>
 
-
-
     <div class="ToDos">
         @foreach (Modul.ToDo dos in Model.doRepository.ToDos)
         {
@@ -29,7 +27,7 @@
                     </div>
 
                     <div class="col-lg-0">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-whatever="@dos.ID" >Edit</button>
+                        <button class="btn btn-primary">Edit</button>
                     </div>
 
                     <div class="col-lg-0">
@@ -43,6 +41,17 @@
         }
     </div>
 
+    <div class="bottom">
+        <div class="row">
+            <div class="col-lg-4">
+                <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#editModal">Create new</button>
+            </div>
+        </div>
+    </div>
+    
+    
+
+
     <!--Modal edit-->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -50,11 +59,22 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Edit ToDo</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"&times;></span>
+                        <span aria-hidden="true" &times;></span>
                     </button>
                 </div>
                 <div class="modal-body">
-
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityLow" />
+                        <label class="form-check-label" for="PriorityLow">Low</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityNormal" />
+                        <label class="form-check-label" for="PriorityNormal">Normal</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityHigh" />
+                        <label class="form-check-label" for="PriorityHigh">High</label>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
