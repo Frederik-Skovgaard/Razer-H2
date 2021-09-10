@@ -24,21 +24,15 @@ namespace Razer_H2.Pages
 
         public string Message { get; set; }
 
-        public void OnPostEdit(int id)
+        public void OnPostEdit()
         {
 
         }
 
         public void OnPostView(int id)
         {
-            
+            Message = $"{id}";
         }
-
-        public void OnPostDelete(int id)
-        {
-
-        }
-
 
         public void OnPost()
         {
