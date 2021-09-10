@@ -1,22 +1,42 @@
-﻿@page
+﻿@page "{handler?}/{id?}"
+
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
 <div class="text-center">
-    <form method="post"><button>Do it...</button></form>
-    
+    <form method="post"><button class="btn btn-lg btn-primary" style="margin-bottom: 1rem;">Do it...</button></form>
 
-    @foreach (Modul.ToDo dos in Model.doRepository.ToDos)
-    {
-        <form class="ToDos">
+
+
+    <div class="ToDos">
+        @foreach (Modul.ToDo dos in Model.doRepository.ToDos)
+        {
             <div class="form-group">
-                <a href="#">ToDo: @dos.TaskDescription</a>
-                <input value="@dos.IsCompleted" type="checkbox" />
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-danger">Delete</button>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <form asp-page-handler="view" asp-route-id="2" method="post">
+                            <a href="#">ToDo: @dos.TaskDescription</a>
+                        </form>
+                    </div>
+                    <div class="col-lg-0">
+                        <form>
+                            <input value="@dos.IsCompleted" class="form-check-input" type="checkbox" />
+                        </form>
+                    </div>
+                    <div class="col-lg-0">
+                        <form asp-page-handler="edit" asp-route-id="@dos.ID" method="post">
+                            <button class="btn btn-primary">Edit</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-0">
+                        <form asp-page-handler="delete" asp-route-id="@dos.ID" method="post">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </form>
-    }
+        }
+    </div>
 </div>

@@ -12,7 +12,7 @@ namespace Razer_H2.Pages
 {
     public class IndexModel : PageModel
     {
-        public ToDoRepository doRepository = new ToDoRepository();
+        public readonly IToDoRepository doRepository = new ToDoRepository();
 
         private readonly ILogger<IndexModel> _logger;
 
@@ -21,16 +21,33 @@ namespace Razer_H2.Pages
             _logger = logger;
         }
 
-        
+
+        public string Message { get; set; }
+
+        public void OnPostEdit(int id)
+        {
+
+        }
+
+        public void OnPostView(int id)
+        {
+            
+        }
+
+        public void OnPostDelete(int id)
+        {
+
+        }
+
+
         public void OnPost()
         {
             ToDo toDo = new ToDo("TaDa");
             doRepository.CreateToDo(toDo);
+
+            ToDo toDoe = new ToDo("Biug Dick TEXTSCREEN");
+            doRepository.CreateToDo(toDoe);
         }
 
-        public void OnGet()
-        {
-            
-        }
     }
 }

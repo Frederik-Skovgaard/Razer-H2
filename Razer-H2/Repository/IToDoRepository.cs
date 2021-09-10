@@ -6,7 +6,7 @@ using Razer_H2.Modul;
 
 namespace Razer_H2.Repository
 {
-    interface IToDoRepository
+    public interface IToDoRepository
     {
         void CreateToDo(ToDo toDo);
 
@@ -15,6 +15,10 @@ namespace Razer_H2.Repository
         void DeleteToDo(Guid id);
 
         List<ToDo> ReadAllToDo();
+
+        ToDo FindToDo(Guid id);
+
+        List<ToDo> ToDos { get; }
 
     }
 }

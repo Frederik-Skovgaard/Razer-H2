@@ -9,9 +9,10 @@ namespace Razer_H2.Repository
 {
     public class ToDoRepository : IToDoRepository
     {
-
         public List<ToDo> ToDos => toDos;
         private List<ToDo> toDos = new List<ToDo>();
+
+
 
         /// <summary>
         /// Create new ToDo
