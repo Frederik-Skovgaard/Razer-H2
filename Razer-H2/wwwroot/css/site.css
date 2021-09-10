@@ -86,9 +86,10 @@ body {
 
 .ToDos {
     margin: auto;
-    border: solid #dee2e6 4px;
+    border: solid #c1c4c7 4px;
     height: 40rem;
     width: 35rem;
+    border-radius: 15px;
 }
     .ToDos a {
         /*margin-left: 1rem;*/
@@ -96,15 +97,23 @@ body {
         text-decoration: none;
     }
 
-    .ToDos .form-group {
+    .ToDos .container {
         margin-top: 1.5rem;
         height: 50px;
         text-align: -webkit-left;
-        line-height: 40px;
+        padding: 0;
+        line-height: 50px;
     }
+        .ToDos .container .row .form-group {
+            display: flex;
+            flex: auto;
+            border: #ccced0 solid 4px;
+            border-radius: 2rem;
+        }
 
     .ToDos .row {
         margin-left: 0.5rem;
+        margin-right: 0.5rem;
     }
 
     .ToDos .btn-primary {
@@ -125,13 +134,14 @@ body {
         padding: 0rem 0rem 0rem 0rem;
     }
 
-.ToDos .form-check-input {
-    position: unset;
-    margin-right: 1rem;
-    height: 20px;
-    width: 20px;
-    vertical-align: text-top;
-}
+    .ToDos .form-check-input {
+        position: unset;
+        margin-right: 1rem;
+        height: 30px;
+        width: 20px;
+        vertical-align: text-top;
+        margin: 0;
+    }
 
 
 .bottom{
@@ -142,4 +152,31 @@ body {
     }
     .bottom .btn {
         margin-top: 1.5rem;
+        
+    }
+    .bottom .row .bottom-btn {
+        padding: 0;
+    }
+
+/* Modal
+-------------------------------------------------- */
+.modalBtn {
+    padding: 0;
+    width: 44px;
+    align-self: self-end;
+    margin-top: -1px;
+    margin-right: -1px;
+    height: 22px;
+    border-radius: 0;
+}
+
+.modal-body {
+    height: 15rem;
+}
+    .modal-body .form-group {
+        text-align: -webkit-left;
+    }
+
+    .modal-body .editModal{
+        float:left;
     }

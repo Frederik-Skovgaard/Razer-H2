@@ -2,79 +2,94 @@
 
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Todo Page";
 }
 
 <div class="text-center">
-    <form method="post"><button class="btn btn-lg btn-primary" style="margin-bottom: 1rem;">Do it...</button></form>
-
+    <h1 class="display-1"> Todos</h1>
     <div class="ToDos">
-        @foreach (Modul.ToDo dos in Model.doRepository.ToDos)
-        {
-            <div class="form-group">
-                <div class="row">
+        <div class="container">
+            <div class="row">
+                @foreach (Modul.ToDo dos in Model.doRepository.ToDos)
+                {
+                    <div class="form-group">
+                        <div class="col-8">
+                            <form asp-page-handler="view" asp-route-id="2" method="post">
+                                <a href="#">ToDo: @dos.TaskDescription</a>
+                            </form>
+                        </div>
 
-                    <div class="col-lg-9">
-                        <form asp-page-handler="view" asp-route-id="2" method="post">
-                            <a href="#">ToDo: @dos.TaskDescription</a>
-                        </form>
+                        <div class="col-1">
+                            <form>
+                                <input value="@dos.IsCompleted" class="form-check-input" type="checkbox" />
+                            </form>
+                        </div>
+
+                        <div class="col-1">
+                            <button class="btn btn-primary">Edit</button>
+                        </div>
+
+                        <div class="col-1">
+                            <form asp-page-handler="delete" asp-route-id="@dos.ID" method="post">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
                     </div>
+                }
 
-                    <div class="col-lg-0">
-                        <form>
-                            <input value="@dos.IsCompleted" class="form-check-input" type="checkbox" />
-                        </form>
-                    </div>
-
-                    <div class="col-lg-0">
-                        <button class="btn btn-primary">Edit</button>
-                    </div>
-
-                    <div class="col-lg-0">
-                        <form asp-page-handler="delete" asp-route-id="@dos.ID" method="post">
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>
-
-                </div>
             </div>
-        }
+        </div>
     </div>
 
     <div class="bottom">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="bottom-btn col-lg-3">
                 <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#editModal">Create new</button>
+            </div>
+            <div class="bottom-btn col-lg-1">
+                <button class="btn btn-lg btn-primary">Save</button>
+            </div>
+            <div class="bottom-btn col-lg-3">
+                <form method="post"><button class="btn btn-lg btn-primary" style="margin-bottom: 1rem;">Do it...</button></form>
             </div>
         </div>
     </div>
-    
-    
+
+
 
 
     <!--Modal edit-->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit ToDo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" &times;></span>
-                    </button>
-                </div>
+                <button type="button" class="modalBtn btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">X</button>
+
                 <div class="modal-body">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityLow" />
-                        <label class="form-check-label" for="PriorityLow">Low</label>
+                    <h1>Create a Todo</h1>
+                    <div class="editModal col-6">
+                        <div class="form-group">
+                            <label>Priority:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityLow" />
+                                <label class="form-check-label" for="PriorityLow">Low</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityNormal" checked />
+                                <label class="form-check-label" for="PriorityNormal">Normal</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityHigh" />
+                                <label class="form-check-label" for="PriorityHigh">High</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityNormal" />
-                        <label class="form-check-label" for="PriorityNormal">Normal</label>
+                    <div class="editModal col-6">
+                        <div class="form-group">
+                            <label for="textDescription">Description: </label>
+                            <input type="text" class="form-control" id="textDescription" aria-describedby="txtDesc" placeholder="Write description" />
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="PriorityRaido" id="PriorityHigh" />
-                        <label class="form-check-label" for="PriorityHigh">High</label>
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
