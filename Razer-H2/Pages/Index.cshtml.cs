@@ -1,47 +1,39 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 using Razer_H2.Modul;
 using Razer_H2.Repository;
+
 
 namespace Razer_H2.Pages
 {
     public class IndexModel : PageModel
     {
-        public readonly IToDoRepository doRepository = new ToDoRepository();
+        private readonly IToDoRepository _doRepository;
 
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(IToDoRepository doRepository)
         {
-            _logger = logger;
+            _doRepository = doRepository;
+        }
+
+        public IList<ToDo> toDos { get; set; }
+
+        public void OnGet()
+        {
+            toDos = _doRepository.ReadAllToDo();
         }
 
 
-        public string Message { get; set; }
+        [BindProperty]
+        public ToDo Todo { get; set; }
 
-        public void OnPostEdit()
+        public IActionResult OnPostAdd()
         {
-
+            _doRepository.CreateToDo(Todo);
+            return RedirectToPage("/Index");
         }
-
-        public void OnPostView(int id)
-        {
-            Message = $"{id}";
-        }
-
-        public void OnPost()
-        {
-            ToDo toDo = new ToDo("TaDa");
-            doRepository.CreateToDo(toDo);
-
-            ToDo toDoe = new ToDo("Biug Dick TEXTSCREEN");
-            doRepository.CreateToDo(toDoe);
-        }
-
     }
 }

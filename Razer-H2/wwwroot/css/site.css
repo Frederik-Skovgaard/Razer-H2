@@ -109,6 +109,7 @@ body {
             flex: auto;
             border: #ccced0 solid 4px;
             border-radius: 2rem;
+            height: 4rem;
         }
 
     .ToDos .row {

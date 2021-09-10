@@ -20,23 +20,5 @@ namespace Razer_H2.Modul
         public Priority Priority { get; set; }
 
         public bool IsCompleted { get; set; }
-
-
-
-        /// <summary>
-        /// Constructor for making a ToDo item
-        /// </summary>
-        /// <param name="desc"></param>
-        /// <param name="check"></param>
-        /// <param name="_priority"></param>
-        public ToDo(string desc)
-        {
-            ID = Guid.NewGuid();
-            Priority = Priority.Normal;
-
-            CreatedTime = DateTime.Now;
-            TaskDescription = desc;
-            IsCompleted = false;
-        }
     }
 }

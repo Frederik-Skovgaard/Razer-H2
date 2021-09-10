@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Razer_H2.Repository;
 
 namespace Razer_H2
 {
@@ -24,6 +25,7 @@ namespace Razer_H2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddScoped<IToDoRepository, ToDoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
