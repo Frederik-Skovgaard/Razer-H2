@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,8 +32,21 @@ namespace Razer_H2.Pages
         [BindProperty]
         public ToDo Todo { get; set; }
 
+
+        [BindProperty, Required, MaxLength(24)]
+        public string TextDescrip { get; set; }
+
+        [BindProperty]
+        public Priority RadioPriority { get; set; }
+
+        public Array PriorityList => Enum.GetValues(typeof(Priority));
+
+
         public IActionResult OnPostAdd()
         {
+            Todo.TaskDescription = TextDescrip;
+            Todo.Priority = RadioPriority;
+
             _doRepository.CreateToDo(Todo);
             return RedirectToPage("/Index");
         }

@@ -13,7 +13,7 @@
                 @foreach (Modul.ToDo dos in Model.toDos)
                 {
                     <div class="form-group">
-                        <div class="col-8">
+                        <div class="col-7">
                             <form asp-page-handler="view" asp-route-id="2" method="post">
                                 <a href="#">ToDo: @dos.TaskDescription</a>
                             </form>
@@ -21,11 +21,11 @@
 
                         <div class="col-1">
                             <form>
-                                <input value="@dos.IsCompleted" class="form-check-input" type="checkbox" />
+                                <input asp-for="@dos.IsCompleted" value="@dos.IsCompleted" class="form-check-input" type="checkbox" />
                             </form>
                         </div>
 
-                        <div class="col-1">
+                        <div class="col-2">
                             <button asp-page="./Edit" asp-route-id="@dos.ID" class="btn btn-primary">Edit</button>
                         </div>
 
@@ -58,33 +58,36 @@
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <button type="button" class="modalBtn btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">X</button>
+                <div class="modal-header">
+                    <button type="button" class="modalBtn btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
                 <form method="post" asp-page-handler="add">
                     <div class="modal-body">
                         <h1>Create a Todo</h1>
                         <div class="editModal col-6">
                             <div class="form-group">
                                 <label>Priority:</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" asp-for="Todo.Priority" data-val="true" value="@Modul.Priority.Low" type="radio" name="PriorityRaido" id="PriorityLow" />
-                                    <label class="form-check-label" asp-for="Todo.Priority" for="PriorityLow">Low</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" asp-for="Todo.Priority" data-val="true"  value="@Modul.Priority.Normal" type="radio" name="PriorityRaido" id="PriorityNormal" checked="checked"/>
-                                    <label class="form-check-label" asp-for="Todo.Priority" for="PriorityNormal">Normal</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" asp-for="Todo.Priority" data-val="true"  value="@Modul.Priority.High" type="radio" name="PriorityRaido" id="PriorityHigh" />
-                                    <label class="form-check-label" asp-for="Todo.Priority" for="PriorityHigh">High</label>
-                                </div>
+                                @foreach (object item in Model.PriorityList)
+                                {
+                            <div class="form-check">
+                                @if (item.ToString() == "Normal")
+                                {
+                                    <input type="radio" name="RadioPriority" value="@item.ToString()" checked /> @item.ToString() <br />
+                                }
+                                else
+                                {
+                                    <input type="radio" name="RadioPriority" value="@item.ToString()" /> @item.ToString() <br />
+                                }
+                            </div>
+                                }
                             </div>
                         </div>
                         <div class="editModal col-6">
 
                             <div class="form-group">
-                                <label for="Desciption" asp-for="Todo.TaskDescription">Description: </label>
-                                <input type="text" asp-for="Todo.TaskDescription" data-val="true" data-val-maxlenght="25" class="form-control" id="Desciption" aria-describedby="txtDesc" placeholder="Write description" />
-                                <span asp-validation-for="Todo.TaskDescription"></span>
+                                <label for="Desciption" asp-for="@Model.TextDescrip">Description: </label>
+                                <input type="text" asp-for="@Model.TextDescrip" class="form-control" id="Desciption" aria-describedby="txtDesc" placeholder="Write description" />
+                                <span asp-validation-for="@Model.TextDescrip"></span>
                             </div>
 
                         </div>
@@ -98,3 +101,14 @@
         </div>
     </div>
 </div>
+
+
+@* <div class="form-check">
+        <input class="form-check-input" asp-for="@Model.RadioPriority" value="@Modul.Priority.Low" type="radio" name="PriorityRaido" id="PriorityLow" /> Low<br />
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" asp-for="@Model.RadioPriority" value="@Modul.Priority.Normal" type="radio" name="PriorityRaido" id="PriorityNormal" /> Normal<br />
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" asp-for="@Model.RadioPriority" value="@Modul.Priority.High" type="radio" name="PriorityRaido" id="PriorityHigh" />High <br />
+    </div> *@

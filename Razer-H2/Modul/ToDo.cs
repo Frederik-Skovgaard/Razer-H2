@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace Razer_H2.Modul
 {
-    public enum Priority { Normal, Low, High}
+    public enum Priority { Low, Normal, High }
 
     public class ToDo
     {

@@ -79,6 +79,7 @@ body {
 .pb-3 {
     text-align: -webkit-center;
 }
+
 .text-center {
     width: 35rem;
 }
@@ -91,6 +92,7 @@ body {
     width: 35rem;
     border-radius: 15px;
 }
+
     .ToDos a {
         /*margin-left: 1rem;*/
         color: black;
@@ -104,6 +106,7 @@ body {
         padding: 0;
         line-height: 50px;
     }
+
         .ToDos .container .row .form-group {
             display: flex;
             flex: auto;
@@ -117,14 +120,29 @@ body {
         margin-right: 0.5rem;
     }
 
+    .ToDos .col-1{
+        padding: 0;
+    }
+
+
+
     .ToDos .btn-primary {
-        margin-right: 5px;
         height: 35px;
-        width: 40px;
+        width: 57px;
         font-size: 15px;
         border-radius: 20px;
         padding: 0rem 0rem 0rem 0rem;
+
+        color: white;
+        transition: color 0.5s, background 0.5s;
+        background-color: #1b6ec2;
     }
+        .ToDos .btn-primary:hover {
+            color: black;
+            background-color: white;
+            box-shadow: 0px 0px 2px #1b6ec2;
+            border: solid #1b6ec2 2.5px;
+        }
 
     .ToDos .btn-danger {
         height: 35px;
@@ -133,7 +151,17 @@ body {
         font-size: 15px;
         border-radius: 20px;
         padding: 0rem 0rem 0rem 0rem;
+        color: white;
+        transition: color 0.5s, background 0.5s;
+
+        background-color: #dc3545;
     }
+        .ToDos .btn-danger:hover {
+            color: black;
+            background-color: white;
+            box-shadow: 0px 0px 2px #dc3545;
+            border: solid #dc3545 2.5px;
+        }
 
     .ToDos .form-check-input {
         position: unset;
@@ -145,23 +173,23 @@ body {
     }
 
 
-.bottom{
-
+.bottom {
 }
+
     .bottom .row {
-        
     }
+
     .bottom .btn {
         margin-top: 1.5rem;
-        
     }
+
     .bottom .row .bottom-btn {
         padding: 0;
     }
 
 /* Modal
 -------------------------------------------------- */
-.modalBtn {
+.modal-header .modalBtn {
     padding: 0;
     width: 44px;
     align-self: self-end;
@@ -169,15 +197,20 @@ body {
     margin-right: -1px;
     height: 22px;
     border-radius: 0;
+    float:right;
 }
-
+.modal-header {
+    display: unset;
+    padding: 0;
+}
 .modal-body {
     height: 15rem;
 }
+
     .modal-body .form-group {
         text-align: -webkit-left;
     }
 
-    .modal-body .editModal{
-        float:left;
+    .modal-body .editModal {
+        float: left;
     }
