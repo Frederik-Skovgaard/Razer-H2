@@ -134,6 +134,8 @@ body {
         border-radius: 20px;
         padding: 0rem 0rem 0rem 0rem;
 
+        line-height:2;
+
         color: white;
         transition: color 0.5s, background 0.5s;
         background-color: #1b6ec2;

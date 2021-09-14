@@ -11,6 +11,7 @@ using Razer_H2.Modul;
 using Razer_H2.Repository;
 
 
+
 namespace Razer_H2.Pages
 {
     public class IndexModel : PageModel
@@ -23,21 +24,43 @@ namespace Razer_H2.Pages
         }
 
         //---------------Get-----------------
-
         [BindProperty]
         public IList<ToDo> ToDos { get; set; }
 
+        //---------------Add-----------------
+        [BindProperty, Required, MaxLength(24)]
+        public string TextDescrip { get; set; }
+
+        [BindProperty]
+        public Priority RadioPriority { get; set; }
+
+        public Array PriorityList => Enum.GetValues(typeof(Priority));
+
+        //---------------Edit-----------------
+        [BindProperty]
+        public List<Guid> IsChecked { get; set; }
+
+        [BindProperty]
+        public bool Check { get; set; }
+
+        [BindProperty]
+        public Priority ToPriority { get; set; }
+
+
+        /// <summary>
+        /// on startup load list
+        /// </summary>
         public void OnGet()
         {
             ToDos = _doRepository.ReadAllToDo();
             ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
         }
 
-        //---------------Edit-----------------
-        [BindProperty]
-        public List<Guid> IsChecked { get; set; }
-
-
+        
+        /// <summary>
+        /// If checkbox is checked change isCompleted to true
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPostIsChecked()
         {
             ToDos = _doRepository.ReadAllToDo();
@@ -54,25 +77,31 @@ namespace Razer_H2.Pages
             return RedirectToPage("/Index");
         }
 
-        public IActionResult OnPostEdit()
+        /// <summary>
+        /// Update selected Todo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult OnPostEdit(Guid id)
         {
+            ToDo todos = _doRepository.FindToDo(id);
 
+            todos.Priority = RadioPriority;
+            todos.IsCompleted = Check;
+            todos.TaskDescription = TextDescrip;
+
+            _doRepository.UpdateToDo(todos);
 
 
             ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
-
             return RedirectToPage("/Index");
         }
 
-        //---------------Add-----------------
-        [BindProperty, Required, MaxLength(24)]
-        public string TextDescrip { get; set; }
 
-        [BindProperty]
-        public Priority RadioPriority { get; set; }
-
-        public Array PriorityList => Enum.GetValues(typeof(Priority));
-
+        /// <summary>
+        /// Add Todo
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPostAdd()
         {
             ToDo todo = new ToDo(TextDescrip, RadioPriority);
@@ -81,8 +110,11 @@ namespace Razer_H2.Pages
             return RedirectToPage("/Index");
         }
 
-
-        //---------------Delete-----------------
+        /// <summary>
+        /// Delete Todo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult OnPostDelete(Guid id)
         {
             ToDo todo = _doRepository.FindToDo(id);
