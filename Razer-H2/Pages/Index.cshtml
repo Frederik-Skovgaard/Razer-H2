@@ -19,7 +19,15 @@
                                 <a href="#">ToDo: @item.TaskDescription</a>
                             </div>
                             <div class="col-1">
-                                <input value="@item.ID" name="IsChecked" class="form-check-input" type="checkbox" />
+                                @if (item.IsCompleted == true)
+                                {
+                                    <input value="@item.ID" name="IsChecked" class="form-check-input" type="checkbox" checked />
+                                }
+                                else
+                                {
+                                    <input value="@item.ID" name="IsChecked" class="form-check-input" type="checkbox" />
+                                }
+
                             </div>
                             <div class="col-2">
                                 <a asp-page-handler="/edit" asp-route-id="@item.ID" style="line-height: 2;" type="button" class="btn btn-primary">Edit</a>
@@ -31,17 +39,14 @@
                     }
                 </div>
             </div>
-        </div>
-
-        <div class="bottom">
-            <div class="row">
+            <div class="bottom-btn-group">
                 <div class="bottom-btn col-lg-3">
                     <button class="btn btn-lg btn-primary" type="button" data-toggle="modal" data-target="#addModal">Create new</button>
                 </div>
-                <div class="bottom-btn col-lg-2">
+                <div class="bottom-btn Other col-lg-2">
                     <button class="btn btn-lg btn-primary" asp-page-handler="IsChecked" type="submit">Save</button>
                 </div>
-                <div class="bottom-btn col-2">
+                <div class="bottom-btn Other col-lg-1">
                     <button class="btn btn-lg btn-primary" asp-page-handler="load" type="submit">Load</button>
                 </div>
             </div>
@@ -85,7 +90,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>

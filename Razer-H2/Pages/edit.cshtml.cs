@@ -47,6 +47,7 @@ namespace Razer_H2.Pages
                 return RedirectToPage("/NotFound");
             }
 
+            IsChecked = Todo.IsCompleted;
             TextDescrip = Todo.TaskDescription;
             RadioPriority = Todo.Priority;
 

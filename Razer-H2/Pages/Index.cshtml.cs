@@ -47,31 +47,32 @@ namespace Razer_H2.Pages
         public ToDo Todo { get; set; }
 
 
+
         /// <summary>
         /// on startup load list
         /// </summary>
         public void OnGet()
         {
             ToDos = _doRepository.ReadAllToDo();
+
             ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
         }
 
-        
+
         /// <summary>
         /// If checkbox is checked change isCompleted to true
         /// </summary>
         /// <returns></returns>
         public IActionResult OnPostIsChecked()
         {
-            ToDos = _doRepository.ReadAllToDo();
-
             foreach (var item in IsChecked)
             {
                 ToDo to = _doRepository.FindToDo(item);
                 to.IsCompleted = true;
-               _doRepository.UpdateToDo(to);
-            } 
+                _doRepository.UpdateToDo(to);
+            }
 
+            ToDos = _doRepository.ReadAllToDo();
             ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
 
             return RedirectToPage("/Index");
@@ -90,6 +91,10 @@ namespace Razer_H2.Pages
             todo.Priority = RadioPriority;
 
             _doRepository.CreateToDo(todo);
+
+            ToDos = _doRepository.ReadAllToDo();
+            ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
+
             return RedirectToPage("/Index");
         }
 
@@ -102,6 +107,8 @@ namespace Razer_H2.Pages
         {
             ToDo todo = _doRepository.FindToDo(id);
             _doRepository.DeleteToDo(todo);
+
+            ToDos = _doRepository.ReadAllToDo();
 
             ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
 
