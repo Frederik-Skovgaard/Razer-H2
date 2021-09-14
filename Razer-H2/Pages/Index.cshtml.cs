@@ -41,10 +41,10 @@ namespace Razer_H2.Pages
         public List<Guid> IsChecked { get; set; }
 
         [BindProperty]
-        public bool Check { get; set; }
+        public Priority ToPriority { get; set; }
 
         [BindProperty]
-        public Priority ToPriority { get; set; }
+        public ToDo Todo { get; set; }
 
 
         /// <summary>
@@ -77,26 +77,6 @@ namespace Razer_H2.Pages
             return RedirectToPage("/Index");
         }
 
-        /// <summary>
-        /// Update selected Todo
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IActionResult OnPostEdit(Guid id)
-        {
-            ToDo todos = _doRepository.FindToDo(id);
-
-            todos.Priority = RadioPriority;
-            todos.IsCompleted = Check;
-            todos.TaskDescription = TextDescrip;
-
-            _doRepository.UpdateToDo(todos);
-
-
-            ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
-            return RedirectToPage("/Index");
-        }
-
 
         /// <summary>
         /// Add Todo
@@ -104,7 +84,10 @@ namespace Razer_H2.Pages
         /// <returns></returns>
         public IActionResult OnPostAdd()
         {
-            ToDo todo = new ToDo(TextDescrip, RadioPriority);
+            ToDo todo = new ToDo();
+
+            todo.TaskDescription = TextDescrip;
+            todo.Priority = RadioPriority;
 
             _doRepository.CreateToDo(todo);
             return RedirectToPage("/Index");
@@ -124,5 +107,14 @@ namespace Razer_H2.Pages
 
             return RedirectToPage("/Index");
         }
+
+        public IActionResult OnPostLoad()
+        {
+            ToDos = _doRepository.ReadAllToDo();
+            ToDos = ToDos.Where(x => x.IsCompleted == true).ToList();
+
+            return Page();
+        }
+
     }
 }

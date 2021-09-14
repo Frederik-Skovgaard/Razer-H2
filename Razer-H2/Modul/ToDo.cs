@@ -8,7 +8,7 @@ namespace Razer_H2.Modul
 {
     public enum Priority { Low, Normal, High }
 
-    public class ToDo
+    public class ToDo : IToDo
     {
         //ToDo class felt
         public Guid ID { get; set; }
@@ -21,13 +21,13 @@ namespace Razer_H2.Modul
 
         public bool IsCompleted { get; set; }
 
-        public ToDo(string text, Priority pri)
+        public ToDo()
         {
             ID = Guid.NewGuid();
-            Priority = pri;
+            Priority = Priority.Normal;
             IsCompleted = false;
             CreatedTime = DateTime.UtcNow;
-            TaskDescription = text;
+            TaskDescription = "";
         }
     }
 }

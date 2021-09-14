@@ -88,7 +88,7 @@ body {
 .ToDos {
     margin: auto;
     border: solid #c1c4c7 4px;
-    height: 40rem;
+    height: 37rem;
     width: 35rem;
     border-radius: 15px;
 }
@@ -118,10 +118,10 @@ body {
     .ToDos .row {
         margin-left: 0.5rem;
         margin-right: 0.5rem;
-        display:block;
+        display: block;
     }
 
-    .ToDos .col-1{
+    .ToDos .col-1 {
         padding: 0;
     }
 
@@ -133,13 +133,13 @@ body {
         font-size: 15px;
         border-radius: 20px;
         padding: 0rem 0rem 0rem 0rem;
-
-        line-height:2;
+        line-height: 2;
 
         color: white;
         transition: color 0.5s, background 0.5s;
         background-color: #1b6ec2;
     }
+
         .ToDos .btn-primary:hover {
             color: black;
             background-color: white;
@@ -156,9 +156,9 @@ body {
         padding: 0rem 0rem 0rem 0rem;
         color: white;
         transition: color 0.5s, background 0.5s;
-
         background-color: #dc3545;
     }
+
         .ToDos .btn-danger:hover {
             color: black;
             background-color: white;
@@ -196,6 +196,7 @@ body {
     display: unset;
     padding: 0;
 }
+
 .modal-body {
     height: 15rem;
 }
@@ -206,4 +207,36 @@ body {
 
     .modal-body .ModalAdd {
         float: left;
+    }
+
+
+/* Edit page
+--------------------------------------------------------*/
+.EditPage {
+    width:  40rem;
+}
+    .EditPage .editBtn {
+        margin-top: 1rem;
+        float: left;
+    }
+    .EditPage .container {
+        margin: auto;
+        border: solid #c1c4c7 4px;
+        height: 15rem;
+        width: 40rem;
+        border-radius: 15px;
+        padding: 1rem;
+    }
+    .EditPage .container .editLabel{
+        margin-right: 3rem;
+    }
+
+    .EditPage .container .editCheckbox {
+        width:15px;
+        height:15px;
+    }
+
+    .container .col-6 {
+        float: left !important;
+        text-align: -webkit-left !important;
     }
