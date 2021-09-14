@@ -9,17 +9,8 @@ namespace Razer_H2.Repository
 {
     public class ToDoRepository : IToDoRepository
     {
-        public List<ToDo> ToDos => toDos;
-        private List<ToDo> toDos;
+        private List<ToDo> toDos = new List<ToDo>();
 
-        public ToDoRepository()
-        {
-            toDos = new List<ToDo>
-            {
-                new ToDo{ID=Guid.NewGuid() ,Priority=Priority.Normal ,IsCompleted=false ,CreatedTime=DateTime.UtcNow ,TaskDescription="TextDescription1"},
-                new ToDo{ID=Guid.NewGuid() ,Priority=Priority.Normal ,IsCompleted=false ,CreatedTime=DateTime.UtcNow ,TaskDescription="TextDescription2"}
-            };
-        }
 
         /// <summary>
         /// Create new ToDo
@@ -55,15 +46,10 @@ namespace Razer_H2.Repository
         /// Update ToDo
         /// </summary>
         /// <param name="id"></param>
-        public ToDo UpdateToDo(Guid id, string desc, bool isCheck, Priority priority)
+        public void UpdateToDo(ToDo obj)
         {
-            ToDo obj = FindToDo(id);
-
-            obj.IsCompleted = isCheck;
-            obj.TaskDescription = desc;
-            obj.Priority = priority;
-
-            return obj;
+            int index = toDos.FindIndex(x => x.ID == obj.ID);
+            toDos[index] = obj;
         }
 
         /// <summary>

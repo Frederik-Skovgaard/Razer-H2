@@ -10,15 +10,13 @@ namespace Razer_H2.Repository
     {
         void CreateToDo(ToDo toDo);
 
-        ToDo UpdateToDo(Guid id, string desc, bool isCheck, Priority priority);
+        void UpdateToDo(ToDo obj);
 
         void DeleteToDo(ToDo toDo);
 
         List<ToDo> ReadAllToDo();
 
         ToDo FindToDo(Guid id);
-
-        List<ToDo> ToDos { get; }
 
     }
 }

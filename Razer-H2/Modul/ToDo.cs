@@ -20,5 +20,14 @@ namespace Razer_H2.Modul
         public Priority Priority { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public ToDo(string text, Priority pri)
+        {
+            ID = Guid.NewGuid();
+            Priority = pri;
+            IsCompleted = false;
+            CreatedTime = DateTime.UtcNow;
+            TaskDescription = text;
+        }
     }
 }
