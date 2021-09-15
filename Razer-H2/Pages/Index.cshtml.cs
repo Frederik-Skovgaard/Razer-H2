@@ -65,6 +65,7 @@ namespace Razer_H2.Pages
         /// <returns></returns>
         public IActionResult OnPostIsChecked()
         {
+
             foreach (var item in IsChecked)
             {
                 ToDo to = _doRepository.FindToDo(item);
@@ -84,7 +85,7 @@ namespace Razer_H2.Pages
         /// </summary>
         /// <returns></returns>
         public IActionResult OnPostAdd()
-        {
+        { 
             ToDo todo = new ToDo();
 
             todo.TaskDescription = TextDescrip;
