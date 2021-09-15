@@ -112,7 +112,7 @@ body {
     .ToDos .bottom-btn {
         float: left;
         width: 10rem;
-        margin-right: 11rem;
+        margin-right: 4rem;
     }
 
         .ToDos .bottom-btn .btn-primary {
@@ -121,6 +121,15 @@ body {
             font-size: 18px;
             border-radius: 10px !important;
             border: solid 2px #007bff;
+            font-weight: 700;
+        }
+
+        .ToDos .bottom-btn .btn-danger {
+            height: 45px;
+            width: 115px;
+            font-size: 18px;
+            border-radius: 10px !important;
+            border: solid 2px #dc3545;
             font-weight: 700;
         }
 

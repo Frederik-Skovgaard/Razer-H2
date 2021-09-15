@@ -12,7 +12,7 @@
         <div class="ToDos">
             <div class="container">
                 <div class="row">
-                    @foreach (Modul.ToDo item in Model.ToDos)
+                    @foreach (Modul.ToDo item in Model.ToDos.OrderBy(x => x.CreatedTime))
                     {
                         <div class="form-group">
                             <div class="col-7">
@@ -46,8 +46,11 @@
                 <div class="bottom-btn Other col-lg-2">
                     <button class="btn btn-lg btn-primary" asp-page-handler="IsChecked" type="submit">Save</button>
                 </div>
-                <div class="bottom-btn Other col-lg-1">
+                <div class="bottom-btn Other col-lg-2">
                     <button class="btn btn-lg btn-primary" asp-page-handler="load" type="submit">Load</button>
+                </div>
+                <div class="bottom-btn Other col-lg-2">
+                    <button class="btn btn-lg btn-danger" asp-page-handler="back" type="submit">Back</button>
                 </div>
             </div>
         </div>

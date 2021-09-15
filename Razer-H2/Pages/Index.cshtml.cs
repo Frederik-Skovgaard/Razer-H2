@@ -55,7 +55,7 @@ namespace Razer_H2.Pages
         {
             ToDos = _doRepository.ReadAllToDo();
 
-            ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
+            ToDos = ToDos.Where(x => x.IsCompleted == false).OrderBy(x => x.CreatedTime).ToList();
         }
 
 
@@ -73,7 +73,7 @@ namespace Razer_H2.Pages
             }
 
             ToDos = _doRepository.ReadAllToDo();
-            ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
+            ToDos = ToDos.Where(x => x.IsCompleted == false).OrderBy(x => x.CreatedTime).ToList();
 
             return RedirectToPage("/Index");
         }
@@ -93,7 +93,7 @@ namespace Razer_H2.Pages
             _doRepository.CreateToDo(todo);
 
             ToDos = _doRepository.ReadAllToDo();
-            ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
+            ToDos = ToDos.Where(x => x.IsCompleted == false).OrderByDescending(x => x.CreatedTime).ToList();
 
             return RedirectToPage("/Index");
         }
@@ -110,7 +110,7 @@ namespace Razer_H2.Pages
 
             ToDos = _doRepository.ReadAllToDo();
 
-            ToDos = ToDos.Where(x => x.IsCompleted == false).ToList();
+            ToDos = ToDos.Where(x => x.IsCompleted == false).OrderBy(x => x.CreatedTime).ToList();
 
             return RedirectToPage("/Index");
         }
@@ -118,9 +118,14 @@ namespace Razer_H2.Pages
         public IActionResult OnPostLoad()
         {
             ToDos = _doRepository.ReadAllToDo();
-            ToDos = ToDos.Where(x => x.IsCompleted == true).ToList();
+            ToDos = ToDos.Where(x => x.IsCompleted == true).OrderBy(x => x.CreatedTime).ToList();
 
             return Page();
+        }
+
+        public IActionResult OnPostBack()
+        {
+            return RedirectToPage("/Index");
         }
 
     }
