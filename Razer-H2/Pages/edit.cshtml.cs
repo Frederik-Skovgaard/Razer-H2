@@ -38,7 +38,7 @@ namespace Razer_H2.Pages
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IActionResult OnGet(Guid id)
+        public IActionResult OnGet(int id)
         {
             Todo = doRepository.FindToDo(id);
 
@@ -49,7 +49,7 @@ namespace Razer_H2.Pages
 
             IsChecked = Todo.IsCompleted;
             TextDescrip = Todo.TaskDescription;
-            RadioPriority = Todo.Priority;
+            RadioPriority = (Priority)Todo.Priority;
 
             return Page();
         }
@@ -67,10 +67,11 @@ namespace Razer_H2.Pages
         /// Save new data
         /// </summary>
         /// <returns></returns>
-        public IActionResult OnPostSave()
+        public IActionResult OnPostSave(int id)
         {
+            Todo.Todo_ID = id;
             Todo.TaskDescription = TextDescrip;
-            Todo.Priority = RadioPriority;
+            Todo.Priority = (int)RadioPriority;
             Todo.IsCompleted = IsChecked;
 
             doRepository.UpdateToDo(Todo);

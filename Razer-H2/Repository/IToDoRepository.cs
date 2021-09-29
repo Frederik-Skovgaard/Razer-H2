@@ -16,7 +16,7 @@ namespace Razer_H2.Repository
 
         List<ToDo> ReadAllToDo();
 
-        ToDo FindToDo(Guid id);
+        ToDo FindToDo(int id);
 
     }
 }

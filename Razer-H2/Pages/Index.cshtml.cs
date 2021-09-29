@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Razer_H2.Modul;
 using Razer_H2.Repository;
@@ -23,6 +24,7 @@ namespace Razer_H2.Pages
             _doRepository = doRepository;
         }
 
+
         //---------------Get-----------------
         [BindProperty]
         public IList<ToDo> ToDos { get; set; }
@@ -38,7 +40,7 @@ namespace Razer_H2.Pages
 
         //---------------Edit-----------------
         [BindProperty]
-        public List<Guid> IsChecked { get; set; }
+        public List<int> IsChecked { get; set; }
 
         [BindProperty]
         public Priority ToPriority { get; set; }
@@ -53,11 +55,10 @@ namespace Razer_H2.Pages
         /// </summary>
         public void OnGet()
         {
+            
             ToDos = _doRepository.ReadAllToDo();
-
-            ToDos = ToDos.Where(x => x.IsCompleted == false).OrderBy(x => x.CreatedTime).ToList();
+            ToDos = ToDos.Where(x => x.IsCompleted != true).OrderBy(b => b.CreatedTime).ToList();
         }
-
 
         /// <summary>
         /// If checkbox is checked change isCompleted to true
@@ -65,16 +66,12 @@ namespace Razer_H2.Pages
         /// <returns></returns>
         public IActionResult OnPostIsChecked()
         {
-
             foreach (var item in IsChecked)
             {
                 ToDo to = _doRepository.FindToDo(item);
                 to.IsCompleted = true;
                 _doRepository.UpdateToDo(to);
             }
-
-            ToDos = _doRepository.ReadAllToDo();
-            ToDos = ToDos.Where(x => x.IsCompleted == false).OrderBy(x => x.CreatedTime).ToList();
 
             return RedirectToPage("/Index");
         }
@@ -85,16 +82,13 @@ namespace Razer_H2.Pages
         /// </summary>
         /// <returns></returns>
         public IActionResult OnPostAdd()
-        { 
+        {
             ToDo todo = new ToDo();
 
             todo.TaskDescription = TextDescrip;
-            todo.Priority = RadioPriority;
+            todo.Priority = (int)RadioPriority;
 
             _doRepository.CreateToDo(todo);
-
-            ToDos = _doRepository.ReadAllToDo();
-            ToDos = ToDos.Where(x => x.IsCompleted == false).OrderByDescending(x => x.CreatedTime).ToList();
 
             return RedirectToPage("/Index");
         }
@@ -104,28 +98,28 @@ namespace Razer_H2.Pages
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IActionResult OnPostDelete(Guid id)
+        public IActionResult OnPostDelete(int id)
         {
             ToDo todo = _doRepository.FindToDo(id);
             _doRepository.DeleteToDo(todo);
 
-            ToDos = _doRepository.ReadAllToDo();
-
-            ToDos = ToDos.Where(x => x.IsCompleted == false).OrderBy(x => x.CreatedTime).ToList();
 
             return RedirectToPage("/Index");
         }
 
         public IActionResult OnPostLoad()
         {
+            ToDos.Clear();
+
             ToDos = _doRepository.ReadAllToDo();
-            ToDos = ToDos.Where(x => x.IsCompleted == true).OrderBy(x => x.CreatedTime).ToList();
+            ToDos = ToDos.Where(x => x.IsCompleted == true).OrderBy(b => b.CreatedTime).ToList();
 
             return Page();
         }
 
         public IActionResult OnPostBack()
         {
+
             return RedirectToPage("/Index");
         }
 
