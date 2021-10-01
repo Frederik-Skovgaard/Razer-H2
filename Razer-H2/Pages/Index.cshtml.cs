@@ -29,6 +29,9 @@ namespace Razer_H2.Pages
         [BindProperty]
         public IList<ToDo> ToDos { get; set; }
 
+        [BindProperty]
+        public IList<Contact> Contacts { get; set; }
+
         //---------------Add-----------------
         [BindProperty, Required, MaxLength(24)]
         public string TextDescrip { get; set; }
@@ -48,6 +51,9 @@ namespace Razer_H2.Pages
         [BindProperty]
         public ToDo Todo { get; set; }
 
+        [BindProperty]
+        public Contact Contact { get; set; }
+
 
 
         /// <summary>
@@ -55,6 +61,7 @@ namespace Razer_H2.Pages
         /// </summary>
         public void OnGet()
         {
+            Contacts = _doRepository.ReadAllContacts();
             
             ToDos = _doRepository.ReadAllToDo();
             ToDos = ToDos.Where(x => x.IsCompleted != true).OrderBy(b => b.CreatedTime).ToList();

@@ -18,5 +18,15 @@ namespace Razer_H2.Repository
 
         ToDo FindToDo(int id);
 
+        //Contacts
+
+        void CreateContact(Contact obj);
+
+        void DeleteContact(Contact obj);
+
+        List<Contact> ReadAllContacts();
+
+        void UpdateContact(Contact obj);
+
     }
 }
